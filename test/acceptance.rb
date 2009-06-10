@@ -2,7 +2,7 @@ require 'spec'
 require 'src/bowling.rb'
 require 'ftools'
 
-describe Bowling do
+describe "Bowling command line" do
 	
 	it "should read an input file and generate another equals to the model" do
 		
