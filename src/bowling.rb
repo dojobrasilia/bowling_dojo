@@ -11,21 +11,33 @@ class Bowling
 		strike = false
 		spare = false
 		
-		for frame in @frames do
+		for i in (0..@frames.length-1) do
+			frame=@frames[i]
+			nextFrame=@frames[i+1]
+			nextNextFrame=@frames[i+2]
+			
+			spare =  (frame[0]+frame[1] == 10 and frame[0] != 10)
+			strike = (frame[0] == 10)			
+
 			if strike
-				if frame[0]!=10
-					pins += (2*frame[0]) + (2*frame[1])
+				
+				if !nextFrame.nil?
+					if nextFrame[0] != 10
+						pins += frame[0] + nextFrame[0] + nextFrame[1]
+					else
+						#todo next next eh nil ???
+						pins += frame[0] + nextFrame[0] + nextNextFrame[0]
+					end
 				else
-					pins += frame[0]
+					# e agora??
 				end
+				
 			elsif spare
-				pins += (2*frame[0]) + frame[1]
+				# next eh nil????
+				pins += frame[0] + frame[1] + nextFrame[0]
 			else
 				pins += frame[0] + frame[1]
 			end
-
-			spare =  (frame[0]+frame[1] == 10 and frame[0] != 10)
-			strike = (frame[0] == 10)			
 		end
 		
 		pins
